@@ -987,7 +987,7 @@ class Kohana_Core {
 
 		if (Kohana::$errors AND $error = error_get_last() AND in_array($error['type'], Kohana::$shutdown_errors))
 		{
-			// Clean the output buffer
+			 //Clean the output buffer
 			ob_get_level() and ob_clean();
 
 			// Fake an exception for nice debugging

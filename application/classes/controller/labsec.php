@@ -1,40 +1,41 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Labsec extends Controller {
+class Controller_Labsec extends Controller_Base {
 	
 	private $itens_menu;
 
 	public function before(){
     	$this->itens_menu = array(
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'home'))."'><img src='/estaticos/img/logo-menu.jpg'></a>",
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'sobre'))."'>sobre</a>",
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'premiacoes'))."'>premiações</a>",
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'publicacoes'))."'>publicações</a>",
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'exposicoes'))."'>exposições</a>",
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'palestras'))."'>palestras e workshops</a>",
+		"<a href='/".Route::get('site_aberto')->uri(array('action' => 'home'))."'><img src='/estaticos/img/logo-menu.jpg'></a>",
+		"<a href='/".Route::get('site_aberto')->uri(array('action' => 'sobre'))."'>sobre</a>",
+		"<a href='/".Route::get('site_aberto')->uri(array('action' => 'premiacoes'))."'>premiações</a>",
+		"<a href='/".Route::get('site_aberto')->uri(array('action' => 'publicacoes'))."'>publicações</a>",
+		"<a href='/".Route::get('site_aberto')->uri(array('action' => 'exposicoes'))."'>exposições</a>",
+		"<a href='/".Route::get('site_aberto')->uri(array('action' => 'palestras'))."'>palestras e workshops</a>",
     	);
 	}
 	
-	public function action_index()
+	public function action_mapa()
 	{
-		$html= "O total de páginas são: " .
-				"<br><a href='/labsec/home'>home</a>" .
-				"<br><a href='/labsec/trabalho'>interna dos trabalhos</a>" .
-				"<br><a href='/labsec/sobre'>interna Sobre</a>" .
-				"<br><a href='/labsec/premiacoes'>interna Premiações</a>" .
-				"<br><a href='/labsec/publicacoes'>interna Publicações</a>" .
-				"<br><a href='/labsec/exposicoes'>interna Exposições</a>" .
-				"<br><a href='/labsec/palestras'>interna Palestras e Workshops</a>" .
-				"<br><a href='/labsec/login'>login</a>" .
-				"<br><a href='/labsec/admin_projetos'>cms com os arquivos cadastrados</a>" .
-				"<br><a href='/labsec/admin_projeto'>tela de cadastro/edição de projeto</a>" ;
-		
+		$html= "Páginas disponíveis:" .
+				"<br><a href='/home'>home</a>" .
+				"<br><a href='/trabalho'>interna dos trabalhos</a>" .
+				"<br><a href='/sobre'>interna Sobre</a>" .
+				"<br><a href='/premiacoes'>interna Premiações</a>" .
+				"<br><a href='/publicacoes'>interna Publicações</a>" .
+				"<br><a href='/exposicoes'>interna Exposições</a>" .
+				"<br><a href='/palestras'>interna Palestras e Workshops</a>" .
+				"<br><a href='/login/'>login</a>" .
+				"<br><a href='/login/logout'>logout</a>" .
+				"<br><a href='/painel/projetos'>cms com os arquivos cadastrados</a>" .
+				"<br><a href='/painel/projeto'>tela de cadastro/edição de projeto</a>" ;
+				
 		$this->response->body($html);
 	}
 
 	public function action_home()
 	{
-		$base_params = array('inner_view' => View::factory('labsec/home', array()));
+		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => ORM::factory('projeto')->find_all())));
 		$this->response->body(View::factory('labsec/base_projetos', $base_params)->render());
 	}
 
@@ -90,49 +91,48 @@ class Controller_Labsec extends Controller {
 
 	public function action_trabalho()
 	{
-		$itens_menu = array(
-		"<a href='/".Route::get('default')->uri(array('controller'=>'labsec', 'action' => 'home'))."'><img src='/estaticos/img/logo-menu.jpg'></a><br><br><strong>Almanaque anos 70</strong>",
-		"Ediouro, 2006",
-		"&#9733; Galo de prata, 2a mosra de design e artes gráficas Latino-Americana - Buenos Aires, Argentina 2006<br>" .
-			"&#9733; selecionado para a IX Bienal Brasileira de Design Gráfico - São Paulo, Brasil; Cidade do México, México; Xangai, China 2009<br>" .
-			"&#9733; publicado no livro Anatomia d Design, Editora Blicher, 2009<br>" .
-			"&#9733; exibido na Mostra Brasil Contemporary - Roterdã, Holanda 2009",
-		"foto de capa: Marcelo Theobald",
-		"<i>Livro, Não ficção, Almanaques e Cia</i>",
-		);
 		
-		$base_params = array(
-			'inner_view' => View::factory('labsec/trabalho', array()),
-			'itens_menu' => View::factory('labsec/menu', array('itens_menu'=>$itens_menu))
-		);
+			if(is_numeric($this->request->param('id'))){ 
+		    	
+		    	$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->find();
+	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode("<br>&#9733; ",$projeto->mencoes) : null;
+		    	
+				$itens_menu = array(
+					"<a href='/".Route::get('site_aberto')->uri(array('action' => 'home'))."'><img src='/estaticos/img/logo-menu.jpg'></a><br><br><strong>{$projeto->nome}</strong>",
+					$projeto->cliente_ano,
+					$projeto->mencoes,
+					$projeto->creditos,
+					($projeto->categorias) ? "<i>{$projeto->categorias}</i>" : null,
+				);
+				
+				$base_params = array(
+					'inner_view' => View::factory('labsec/trabalho', array('imagens'=>$projeto->imagens)),
+					'itens_menu' => View::factory('labsec/menu', array('itens_menu'=>$itens_menu))
+				);
+		
+				$this->response->body($this->get_grid_2($base_params));
+				
+	    	}else{
+				Request::current()->redirect( Kohana::$base_url );
+	    	}
+	    	
 
-		$this->response->body($this->get_grid_2($base_params));
 	}
 
-    public function action_login() {	
-		$base_params = array('inner_view' => View::factory('labsec/login', array()));
-    	$this->response->body(View::factory('labsec/base_admin', $base_params)->render());
+    public function action_projetothumb($param=array()) {	
+		$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->find();
+		header('Content-Type: '. $projeto->thumb_tipo);
+		echo $projeto->thumb_bin;
+		exit();
     }
 
-    public function action_admin_projetos() {	
-		$base_params = array(
-			'inner_view' => View::factory('labsec/admin_projetos', array()),
-		);
-		$this->response->body($this->get_grid_3($base_params));
+    public function action_projetoimg($param=array()) {	
+    	$Qry = "select id,projeto_id,img_tipo,img_bin,ordem from projetos_imagens where id={$this->request->param('id')}";
+		$Res = DB::query(Database::SELECT,$Qry)->execute()->current();
+		header('Content-Type: '. $Res['img_tipo']);
+		echo $Res['img_bin'];
+		exit();
     }
 
-    public function get_grid_2($param=array()) {	
-		$view_out = $param['inner_view']->render();
-		$menu_out = $param['itens_menu']->render();
-		$base_params = array('inner_view' => "<div class='texto'>$view_out</div><div class='menu'>$menu_out</div>");
-    	return View::factory('labsec/base_projetos', $base_params)->render();
-    }
-
-    public function get_grid_3($param=array()) {	
-		$view_out = $param['inner_view']->render();
-		$menu_out = View::factory('labsec/admin_menu', array());
-		$base_params = array('inner_view' => "<table class='canvas_admin' cellpadding='0' cellspacing='0' border='0'><tr><td width='200' rowspan='2' valign='top'>$menu_out</td><td width='560' height='40' align='right'><strong><a href='#' style='font-size:18px;text-decoration:none;'>inserir novo álbum</a></strong></td></tr><tr><td valign='top'>$view_out</td></tr></table>");
-    	return View::factory('labsec/base_admin', $base_params)->render();
-    }
 
 }

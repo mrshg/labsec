@@ -1,0 +1,74 @@
+			@font-face {  
+			  font-family: istock ;  
+			  src: url( /estaticos/font/istok/IstokWeb-Regular.ttf ) format("truetype");  
+			}  
+			
+			* {padding:0px;margin:0px;}
+			body.body-principal, body.body-admin {color: #848484;font-family: Helvetica;font-size: 0.81em;font-weight: lighter;line-height: 1.6em;}
+			body.body-admin {background-color:#ffffff;}
+			body.body-principal {background-color:#c2c2c2;}
+			
+			.menu-top {width:1200px;height:68px;background-color:#ffffff;border-bottom:1px solid #e4e4e4;clear:both;}
+			.menu-top-content {margin:22px auto;display:table;}
+			.menu-top-content span {padding:0px 22px;text-align:center;font-family: istock , verdana, helvetica, sans-serif;font-size:11px;text-transform:uppercase;}
+			.menu-top-content span a {text-decoration:none;color:#000000;}
+			.menu-top-content span a:hover {color:#dddddd;}
+			
+			.lista-projetos img {width:130px;}
+
+			.lista-trabalhos {display:inline-table;width:600px;}
+			.lista-trabalhos span {display: block;margin-bottom: 50px;}
+			
+			.box-logo {width:355px;height:280px;background:url(/estaticos/img/logo.png) no-repeat center;margin:70px auto 30px auto;}
+			.box-menu {width:311px;min-height:245px;background-color:#efefef;border:1px solid #c2c2c2;margin:0px auto;padding-bottom:30px;}
+			.box-menu {padding:16px 20px;}
+			.box-menu p {margin-bottom:12px;}
+			.box-menu center {margin-top:22px;}
+			.box-menu label {display:block;color:9b9b9b;margin-bottom:0px;}
+			.box-menu label a {text-decoration:none;margin-top:5px;display:block;color:#666666;}
+			.box-menu .input_text {width:288px;height:40px;border:1px solid #999999;padding:0px 10px;font-size:18px;}
+
+			.canvas-principal {width:1200px;min-height:600px;background-color:#efefef;border:1px solid #c2c2c2;margin:0px auto;padding-bottom:30px;}
+			.canvas-principal .lista-projetos {text-align: justify;}
+			.canvas-principal .content {margin:60px auto;width:930px;}
+			.canvas-principal .content .texto {float: left;padding-right: 30px;width: 600px;}			
+			.canvas-principal .content .menu {width:300px;float:left}
+			.canvas-principal .content .menu li {border-bottom: 0.15em dotted;list-style: none outside none;padding:10px 0px;}
+			.canvas-principal .content .menu li img {position:relative;top:-10px;left:-10px;}
+			.canvas-principal .content .menu li a {text-decoration:none;color:#848484;}
+			.canvas-principal .content .menu li a:hover {text-decoration:none;color:#bbbbbb;}
+			
+			.dotted {background:url(/estaticos/img/dotted.png) repeat-x;display:block;height:1px;}
+			.canvas_admin, .canvas_admin a {margin:50px auto;font-size:13px;color:#666666;}
+
+			.admin_lista_projetos td {list-style: none outside none;width: 170px;text-align:center;float:left;margin: 0 18px 0 0;}
+			.admin_lista_projetos td:hover {background-color:#efefef;}
+			.admin_lista_projetos td div {background: url("/estaticos/img/bg-album.png") no-repeat scroll center 10px transparent;display: table;height: 165px;width: 170px;}
+			.admin_lista_projetos td div img {height: 120px;position: relative;text-align: center;top: 24px;width: 120px;}
+			.admin_lista_projetos td .tit {font-weight:normal;font-size:15px;color:#666;display:block;}
+			.admin_lista_projetos td .txt {font-weight:normal;font-size:13px;color:#aaa;display:block;}
+
+			.admin_form_projeto .submit_fields {width:510px;heihgt:500px;background-color:#efefef;padding:20px;text-align:right;height: 44px;}
+			.admin_form_projeto .text_fields {width:510px;heihgt:500px;background-color:#efefef;padding:5px 22px 20px;}
+			.admin_form_projeto .image_fields {width:555px;heihgt:500px;background-color:transparent;padding:5px 0px;}
+			.admin_form_projeto .block_title {font-weight:bolder;font-size:12px;margin:35px 0px 0px 0px;}
+			.admin_form_projeto .submit_fields input {border: 1px solid #999999;height: 40px;width: 510px;}
+			.admin_form_projeto .text_fields label {margin-top:12px;display:block;}
+			.admin_form_projeto .text_fields input {border: 1px solid #999999;height: 40px;width: 490px;padding:0px 10px;font-size:18px;}
+			.admin_form_projeto .text_fields li {display:block;float:none;height:52px;}
+			.admin_form_projeto .text_fields ul {margin-bottom: -10px;}
+			.admin_form_projeto .text_fields .add_field_link {text-align:right;font-size:11px;font-weight:bolder;margin-top:5px;margin-bottom:-5px;}
+			.admin_form_projeto .image_fields table {width:550px;border:1px solid #cccccc;}
+			.admin_form_projeto .image_fields table td {padding:0px;line-height:0em;}
+			.admin_form_projeto .image_fields table input {margin: 0 0px;width: 335px;height:36px;}
+			
+#lista_mencoes li a {   background: url("/estaticos/img/btn_close.png") no-repeat scroll right 0 transparent;cursor: pointer;display: block;float: right;height: 40px;margin: 0;width: 40px;}
+
+.image_fields li {list-style:none;}
+
+	.image_fields table {padding:0px;}
+	.image_fields table td {padding:0px;}
+	.image_fields table tr {vertical-align:top;}
+	.image_fields table th {font-weight: lighter;height: 10px;padding: 5px;text-align: right;}
+	.image_fields table #imagens_remover {width:16px;height:16px;margin:0px;}
+	.image_fields table .handle {cursor:move;}

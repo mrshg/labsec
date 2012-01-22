@@ -13,7 +13,7 @@ class Kohana_Cookie {
 	/**
 	 * @var  string  Magic salt to add to the cookie
 	 */
-	public static $salt = NULL;
+	public static $salt = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855';
 
 	/**
 	 * @var  integer  Number of seconds before the cookie expires

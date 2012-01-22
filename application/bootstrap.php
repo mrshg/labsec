@@ -98,12 +98,12 @@ Kohana::$config->attach(new Config_File);
  * Enable modules. Modules are referenced by a relative or absolute path.
  */
 Kohana::modules(array(
-	// 'auth'       => MODPATH.'auth',       // Basic authentication
-	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	 'auth'       => MODPATH.'auth',       // Basic authentication
+	 'image'      => MODPATH.'image',      // Image manipulation
+	 'cache'      => MODPATH.'cache',      // Caching with multiple backends
+	 'database'   => MODPATH.'database',   // Database access
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'database'   => MODPATH.'database',   // Database access
-	// 'image'      => MODPATH.'image',      // Image manipulation
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
 	));
@@ -112,8 +112,26 @@ Kohana::modules(array(
  * Set the routes. Each route must have a minimum of a name, a URI and a set of
  * defaults for the URI.
  */
+Route::set('site_login', 'login(/<action>)')
+  ->defaults(array(
+	'controller' => 'login',
+	'action'     => 'index',
+  ));
+  
+Route::set('site_fechado', 'painel(/<action>(/<id>))')
+  ->defaults(array(
+	'controller' => 'painel',
+	'action'     => 'projetos',
+  ));
+  
+Route::set('site_aberto', '<action>(/<id>)',array('action' => '(home|trabalho|sobre|premiacoes|publicacoes|exposicoes|palestras)'))
+  ->defaults(array(
+    'controller' => 'labsec',
+    'action' => 'home',
+  ));
+
 Route::set('default', '(<controller>(/<action>(/<id>)))')
 	->defaults(array(
 		'controller' => 'labsec',
-		'action'     => 'index',
+		'action'     => 'home',
 	));

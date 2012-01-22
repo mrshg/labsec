@@ -2,7 +2,7 @@
 	<?
 	if($itens_menu){
 		foreach($itens_menu as $item){
-			echo "<li>$item</li>";
+			echo (isset($item) && !empty($item)) ? "<li>$item</li>" : "";
 		}
 	}
 	?>
