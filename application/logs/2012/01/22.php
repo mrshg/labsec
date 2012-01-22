@@ -2789,3 +2789,13 @@
 --
 #0 /Users/marcelo/Documents/workspace/secreto/index.php(109): Kohana_Request->execute()
 #1 {main}
+2012-01-22 16:26:00 --- ERROR: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: estaticos/font/istok/IstokWeb-Regular.ttf ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+2012-01-22 16:26:00 --- STRACE: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: estaticos/font/istok/IstokWeb-Regular.ttf ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+--
+#0 /Users/marcelo/Documents/workspace/secreto/index.php(109): Kohana_Request->execute()
+#1 {main}
+2012-01-22 16:26:04 --- ERROR: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: estaticos/font/istok/IstokWeb-Regular.ttf ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+2012-01-22 16:26:04 --- STRACE: HTTP_Exception_404 [ 404 ]: Unable to find a route to match the URI: estaticos/font/istok/IstokWeb-Regular.ttf ~ SYSPATH/classes/kohana/request.php [ 1126 ]
+--
+#0 /Users/marcelo/Documents/workspace/secreto/index.php(109): Kohana_Request->execute()
+#1 {main}
