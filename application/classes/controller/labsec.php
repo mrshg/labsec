@@ -134,5 +134,80 @@ class Controller_Labsec extends Controller_Base {
 		exit();
     }
 
+    public function action_importdata($param=array()) {	
+    	$sav = true;
+		$dir = '/Users/marcelo/Desktop/imglabsec';
+		echo "<table border=1>";
+		foreach(new DirectoryIterator($dir) as $file){
+
+	
+				if($file!='.' && $file!='..' && $file!='.DS_Store'){
+					
+					$id = intval(substr($file,0,3));
+					
+					if(false){ 
+//					if($id >= -1 && $id<20){
+//					if($id >= 20 && $id<40){
+//					if($id >= 40 && $id<50){
+//					if($id >= 50 && $id<60){
+//					if($id >= 60 && $id<70){
+//					if($id >= 70 && $id<80){
+//					if($id >= 80 && $id<90){
+//					if($id >= 90 && $id<100){
+//					if($id >=100 && $id<120){
+//					if($id >=120 && $id<140){
+						
+						$nome = substr($file,5);
+						$isdir = is_dir($dir.'/'.$file);
+						
+						$list = '';
+						
+				    	$projeto = ORM::factory('projeto');
+			            $projeto->id =intval($id) ;
+			            $projeto->nome = trim($nome);
+			            $projeto->cliente_ano = '-';
+			            if($sav) $projeto->save();
+		
+						if($isdir){
+							foreach(new DirectoryIterator($dir.'/'.$file) as $file2){
+								if($file2!='.' && $file2!='..'){
+														
+									if(is_file("$dir/$file/$file2")) {
+										$a = getimagesize("$dir/$file/$file2");
+										$s = filesize("$dir/$file/$file2");
+										
+										$list .= "$dir/$file/$file2 <br>";
+										
+			    						$projetoimg = ORM::factory('projetoimagem'); 
+										$projetoimg->projeto_id = $projeto->id;
+										$projetoimg->img_tipo = $a['mime'];
+										$projetoimg->img_bin = file_get_contents("$dir/$file/$file2");
+										$projetoimg->ordem = intval(substr($file2,-6,2));
+										if($sav) $projetoimg->save();
+		
+										if(intval(substr($file2,-6,2)) == 0){
+								            $projeto->thumb_tipo=$a['mime'];
+								            $projeto->thumb_bin=file_get_contents("$dir/$file/$file2");
+								            if($sav) $projeto->save();
+										}
+		
+									}
+									
+								}
+							}
+						}
+						
+						echo "<tr><td>$file</td><td>$id</td><td>$nome</td><td>".($isdir==1?'Dir':'file')."</td><td>$list</td></tr>";
+					}
+				}
+			
+			
+			
+		}
+		echo "</table>";
+    	
+		exit();
+    }
+
 
 }

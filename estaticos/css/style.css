@@ -14,7 +14,9 @@
 			.menu-top-content span a {text-decoration:none;color:#000000;}
 			.menu-top-content span a:hover {color:#dddddd;}
 			
+			/*
 			.lista-projetos img {width:130px;}
+			*/
 
 			.lista-trabalhos {display:inline-table;width:600px;}
 			.lista-trabalhos span {display: block;margin-bottom: 50px;}
