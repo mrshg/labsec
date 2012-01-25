@@ -16,9 +16,10 @@ if(isset($user)){
 	<a href='/login/logout'>fazer logout</a>
 	<?
 }
+
+//<a href='/painel/projetos'><div style="border:1px solid #ddd;padding:3px;width:140px;text-decoration:none;">Projetos</div></a>
 ?>
 
-<a href='/painel/projetos'><div style="border:1px solid #ddd;padding:3px;width:140px;text-decoration:none;">Projetos</div></a>
 
 
 

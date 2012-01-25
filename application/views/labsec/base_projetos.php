@@ -2,11 +2,12 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html dir="ltr" xml:lang="pt-br" lang="pt-br" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	    <title>title</title>
+	    <title>Marcelo Martinez / Laboratório Secreto Design Studio</title>
 	    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
-	    <meta name="description" content=""/>
-	    <meta name="keywords" content=""/>
+	    <meta name="description" content="Portfólio do estúdio de design Laboratório Secreto, localizado no Rio de Janeiro e comandado pelo designer e ilustrador Marcelo Martinez."/>
+	    <meta name="keywords" content="laboratorio, secreto, rio de janeiro, rj, marcelo, martinez, design, designer, ilustracao, ilustration, cartoon, livros, livro, book, books, sib, sociedade, ilustradores, brasil, almanaque, bernard, cornwell, boni"/>
 		<link type="text/css" href="/estaticos/css/style.css" rel="stylesheet" />
+		<link href='http://fonts.googleapis.com/css?family=Istok+Web' rel='stylesheet' type='text/css'>
 	</head>
 	<body class="body-principal">
 		

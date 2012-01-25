@@ -23,7 +23,7 @@
 
 				<p>
 				<label for="senha">senha:</label>
-				<input type="text" id="password" name="password" class="input_text" value="<?=$post?$post['password']:''?>">
+				<input type="password" id="password" name="password" class="input_text" value="<?=$post?$post['password']:''?>">
 				</p>
 
 				<center>

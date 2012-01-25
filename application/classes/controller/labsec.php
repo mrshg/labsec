@@ -35,7 +35,8 @@ class Controller_Labsec extends Controller_Base {
 
 	public function action_home()
 	{
-		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => ORM::factory('projeto')->find_all())));
+		$Res = DB::query(Database::SELECT,"select id from projetos")->cached('cached_thumb',84600)->execute()->as_array();
+		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => $Res)));
 		$this->response->body(View::factory('labsec/base_projetos', $base_params)->render());
 	}
 
@@ -119,8 +120,8 @@ class Controller_Labsec extends Controller_Base {
 
 	}
 
-    public function action_projetothumb($param=array()) {	
-		$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->find();
+    public function action_projetothumb($param=array()) {
+		$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->cached('cached_thumb',84600)->find();
 		header('Content-Type: '. $projeto->thumb_tipo);
 		echo $projeto->thumb_bin;
 		exit();
@@ -128,7 +129,7 @@ class Controller_Labsec extends Controller_Base {
 
     public function action_projetoimg($param=array()) {	
     	$Qry = "select id,projeto_id,img_tipo,img_bin,ordem from projetos_imagens where id={$this->request->param('id')}";
-		$Res = DB::query(Database::SELECT,$Qry)->execute()->current();
+		$Res = DB::query(Database::SELECT,$Qry)->cached('cached_thumb',84600)->execute()->current();
 		header('Content-Type: '. $Res['img_tipo']);
 		echo $Res['img_bin'];
 		exit();

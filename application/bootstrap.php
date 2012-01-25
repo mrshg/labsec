@@ -106,6 +106,8 @@ Kohana::modules(array(
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	 'imagefly'  => MODPATH.'imagefly',  // User guide and API documentation
+	
 	));
 
 /**
@@ -135,3 +137,10 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
 		'controller' => 'labsec',
 		'action'     => 'home',
 	));
+
+Route::set('labsec_projetothumb', 'projetothumb/<id>.jpg')
+	->defaults(array(
+		'controller' => 'labsec',
+		'action'     => 'projetothumb',
+	));
+	
