@@ -3,6 +3,10 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
+  	$("#salvar_album").bind('click',function(){
+  		$("#frmproj").submit();
+  	});
+  	
   	/*
     $("#test-list").sortable({
       handle : '.handle',
@@ -33,7 +37,7 @@
 
 
 <ul class="admin_form_projeto">
-<form method="post" enctype="multipart/form-data" >
+<form method="post" id="frmproj" enctype="multipart/form-data" >
 	<?
 		if(isset($errors)){
 			echo "<ul class='errors' style='margin:15px;'>";
@@ -88,8 +92,12 @@
 			<tr>
 				<td valign='middle' style="display:inline;padding:10px 0px;">
 					<input type='file' name='thumb' id='thumb'>
+					<?
+					/*
 					<br>Dimensões recomendadas: 150×200 pixels
 					<br>Tamanho máximo 64kb
+					*/
+					?>
 				</td>
 			</tr>
 		</table>
@@ -125,8 +133,12 @@
 			<tr>
 				<td valign='middle' style="display:inline;padding:10px 0px;">
 					<input type='file' name='image_stored[-1]' id='stored_image'>
+					<?
+					/*
 					<br>Dimensões recomendadas: 575×315 pixels
 					<br>Tamanho máximo 2M
+					*/
+					?>
 				</td>
 			</tr>
 		</table>
@@ -135,7 +147,8 @@
 	
 	<br><br>	
 	<div class="submit_fields">
-		<input type="image" src='/estaticos/img/input_salvar.png' style="width:167px;height:44px;background-color:#666;color:#ddd;">
+		<? /* 		<input type="image" src='/estaticos/img/input_salvar.png' style="width:167px;height:44px;background-color:#666;color:#ddd;"> */ ?>
+		<input type="image" src='/estaticos/img/salvar_projeto.png' style="width:124px;height:44px;border:none;">
 	</div>
 	
 	

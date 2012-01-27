@@ -32,11 +32,23 @@ class Controller_Labsec extends Controller_Base {
 				
 		$this->response->body($html);
 	}
+	
+	private function __obter_lista_projetos($categoria){
+		$categoria = trim($this->request->param('categoria')); //TODO: mysql_real_escape_string
+		
+		if(!empty($categoria)){
+			return DB::query(Database::SELECT,"select id,nome from projetos where categorias like '%$categoria%'")->cached('cached_thumb',84600)->execute()->as_array();
+		}else{
+			return DB::query(Database::SELECT,"select id,nome from projetos")->cached('cached_thumb',84600)->execute()->as_array();
+		}
+	}
 
 	public function action_home()
 	{
-		$Res = DB::query(Database::SELECT,"select id from projetos")->cached('cached_thumb',84600)->execute()->as_array();
-		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => $Res)));
+		$kAt = trim($this->request->param('categoria'));
+		$Res = $this->__obter_lista_projetos($kAt);
+		
+		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => $Res, 'categoria'=>$kAt)));
 		$this->response->body(View::factory('labsec/base_projetos', $base_params)->render());
 	}
 
@@ -94,21 +106,52 @@ class Controller_Labsec extends Controller_Base {
 	{
 		
 			if(is_numeric($this->request->param('id'))){ 
+				
+				$kAt = trim($this->request->param('categoria'));
+				$Res = $this->__obter_lista_projetos($kAt);
+				$nav = array('anterior'=>null, 'proximo'=>null, 'ant_nome'=>null, 'pro_nome'=>null);
+				$cpt = array('twitter'=>null, 'facebook'=>null);
+				for($i=0; $i<count($Res); $i++){
+					if($Res[$i]['id'] == $this->request->param('id')){
+
+						$cpt['twitter'] = "http://twitter.com/?status=".urlencode('Enquanto isso, no #LaboratórioSecreto:')." http://laboratoriosecreto.com/trabalho/{$Res[$i]['id']}"; 
+						$cpt['facebook'] = "http://www.facebook.com/share.php?t=".urlencode('Enquanto isso, no #LaboratórioSecreto...')."&u=http://laboratoriosecreto.com/trabalho/{$Res[$i]['id']}";
+						
+						$nav['anterior'] = '/trabalho/'. (($i==0) ? $Res[count($Res)-1]['id'] : $Res[$i-1]['id']); 
+						$nav['proximo'] = '/trabalho/'. (($i==count($Res)-1) ? $Res[0]['id'] : $Res[$i+1]['id']); 
+						$nav['ant_nome'] = (($i==0) ? $Res[count($Res)-1]['nome'] : $Res[$i-1]['nome']); 
+						$nav['pro_nome'] = (($i==count($Res)-1) ? $Res[0]['nome'] : $Res[$i+1]['nome']); 
+						if($kAt){
+							$nav['anterior'] = $nav['anterior'] ? $nav['anterior'].'/'.$kAt : null;
+							$nav['proximo'] = $nav['proximo'] ? $nav['proximo'].'/'.$kAt : null;
+						}
+					}
+				}
+				
 		    	
 		    	$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->find();
 	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode("<br>&#9733; ",$projeto->mencoes) : null;
+	    		
+	    		if($projeto->categorias){
+	    			$cats_procs = array();
+	    			$categs = explode(',',$projeto->categorias);
+	    			foreach($categs as $categ){
+	    				array_push($cats_procs, "<a href='/categoria/".(trim($categ))."'><i>".(trim($categ))."</i></a>");
+	    			}
+	    			$cats_procs = implode(', ',$cats_procs);
+	    		}
 		    	
 				$itens_menu = array(
-					"<a href='/".Route::get('site_aberto')->uri(array('action' => 'home'))."'><img src='/estaticos/img/logo-menu.jpg'></a><br><br><strong>{$projeto->nome}</strong>",
+					"<a href='/".Route::get('site_aberto')->uri(array('action' => 'home'))."'><img src='/estaticos/img/logo-menu.jpg'></a><strong style='font-weight: bold;clear:both;display:block;'>{$projeto->nome}</strong>",
 					$projeto->cliente_ano,
 					$projeto->mencoes,
 					$projeto->creditos,
-					($projeto->categorias) ? "<i>{$projeto->categorias}</i>" : null,
+					($cats_procs) ? $cats_procs : null,
 				);
 				
 				$base_params = array(
 					'inner_view' => View::factory('labsec/trabalho', array('imagens'=>$projeto->imagens)),
-					'itens_menu' => View::factory('labsec/menu', array('itens_menu'=>$itens_menu))
+					'itens_menu' => View::factory('labsec/menu', array('itens_menu'=>$itens_menu, 'navegacao'=>$nav, 'compartilhe'=>$cpt))
 				);
 		
 				$this->response->body($this->get_grid_2($base_params));
@@ -134,81 +177,5 @@ class Controller_Labsec extends Controller_Base {
 		echo $Res['img_bin'];
 		exit();
     }
-
-    public function action_importdata($param=array()) {	
-    	$sav = true;
-		$dir = '/Users/marcelo/Desktop/imglabsec';
-		echo "<table border=1>";
-		foreach(new DirectoryIterator($dir) as $file){
-
-	
-				if($file!='.' && $file!='..' && $file!='.DS_Store'){
-					
-					$id = intval(substr($file,0,3));
-					
-					if(false){ 
-//					if($id >= -1 && $id<20){
-//					if($id >= 20 && $id<40){
-//					if($id >= 40 && $id<50){
-//					if($id >= 50 && $id<60){
-//					if($id >= 60 && $id<70){
-//					if($id >= 70 && $id<80){
-//					if($id >= 80 && $id<90){
-//					if($id >= 90 && $id<100){
-//					if($id >=100 && $id<120){
-//					if($id >=120 && $id<140){
-						
-						$nome = substr($file,5);
-						$isdir = is_dir($dir.'/'.$file);
-						
-						$list = '';
-						
-				    	$projeto = ORM::factory('projeto');
-			            $projeto->id =intval($id) ;
-			            $projeto->nome = trim($nome);
-			            $projeto->cliente_ano = '-';
-			            if($sav) $projeto->save();
-		
-						if($isdir){
-							foreach(new DirectoryIterator($dir.'/'.$file) as $file2){
-								if($file2!='.' && $file2!='..'){
-														
-									if(is_file("$dir/$file/$file2")) {
-										$a = getimagesize("$dir/$file/$file2");
-										$s = filesize("$dir/$file/$file2");
-										
-										$list .= "$dir/$file/$file2 <br>";
-										
-			    						$projetoimg = ORM::factory('projetoimagem'); 
-										$projetoimg->projeto_id = $projeto->id;
-										$projetoimg->img_tipo = $a['mime'];
-										$projetoimg->img_bin = file_get_contents("$dir/$file/$file2");
-										$projetoimg->ordem = intval(substr($file2,-6,2));
-										if($sav) $projetoimg->save();
-		
-										if(intval(substr($file2,-6,2)) == 0){
-								            $projeto->thumb_tipo=$a['mime'];
-								            $projeto->thumb_bin=file_get_contents("$dir/$file/$file2");
-								            if($sav) $projeto->save();
-										}
-		
-									}
-									
-								}
-							}
-						}
-						
-						echo "<tr><td>$file</td><td>$id</td><td>$nome</td><td>".($isdir==1?'Dir':'file')."</td><td>$list</td></tr>";
-					}
-				}
-			
-			
-			
-		}
-		echo "</table>";
-    	
-		exit();
-    }
-
 
 }

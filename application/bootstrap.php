@@ -126,7 +126,19 @@ Route::set('site_fechado', 'painel(/<action>(/<id>))')
 	'action'     => 'projetos',
   ));
   
-Route::set('site_aberto', '<action>(/<id>)',array('action' => '(home|trabalho|sobre|premiacoes|publicacoes|exposicoes|palestras)'))
+Route::set('site_aberto', '<action>(/<id>(/<categoria>))',array('action' => '(home|trabalho|sobre|premiacoes|publicacoes|exposicoes|palestras)'))
+  ->defaults(array(
+    'controller' => 'labsec',
+    'action' => 'home',
+  ));
+
+Route::set('site_aberto_trabalho', 'trabalho/<id>(/<categoria>)')
+  ->defaults(array(
+    'controller' => 'labsec',
+    'action' => 'home',
+  ));
+
+Route::set('site_aberto_categoria', 'categoria/<categoria>')
   ->defaults(array(
     'controller' => 'labsec',
     'action' => 'home',

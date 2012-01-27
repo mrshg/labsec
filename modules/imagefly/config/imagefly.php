@@ -16,7 +16,7 @@ return array
     
     // Path to the image cache directory you would like to use (Default: 'media/imagecache/')
     // Dont forget the trailing slash!
-    'cache_dir' => 'media/imagecache/',
+    'cache_dir' => 'estaticos/imagecache/',
     
     // Mimic the source file filestructure within the cache_dir (Default: TRUE)
     // Useful if you have lots of images and do not want to store them in one level                                   

@@ -50,6 +50,7 @@ class Controller_Painel extends Controller_Base {
     	$projetos = ORM::factory('projeto')->find_all();
     	
 		$base_params = array(
+			'page' => 'listagem',
 			'user' => Auth::instance()->get_user(),
 			'inner_view' => View::factory('labsec/painel_projetos', array(
 				'projetos'=>$projetos,
@@ -153,6 +154,7 @@ class Controller_Painel extends Controller_Base {
 	    	}
 	    	
 			$base_params = array(
+				'page' => 'formulario',
 				'user' => Auth::instance()->get_user(),
 				'inner_view' => View::factory('labsec/painel_projeto', array(
 					'projeto'=>$projeto,

@@ -2,7 +2,7 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html dir="ltr" xml:lang="pt-br" lang="pt-br" xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-	    <title>title</title>
+	    <title>Painel administrativo - Laboratório Secreto</title>
 	    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 	    <meta name="description" content=""/>
 	    <meta name="keywords" content=""/>

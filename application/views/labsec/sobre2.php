@@ -1,7 +1,7 @@
 	sobre:
 	<br>
 	<p>
-	<strong>Marcelo Martinez</strong> é designer gráfico e ilustrador, nascido no Rio de Janeiro. 
+	<strong>Marcelo Martinez</strong> é designer gráfico e ilustrador, nascido no Rio de Janeiro. 
 	Em 2011, recebeu um dos Prêmios Literários Fundação Biblioteca Nacional pelo 
 	projeto gráfico do <i>Livro-Jogo das Copas Globo Esporte</i>, editado pela Casa da Palavra. 
 	Em 2010, o portfólio do Laboratório Secreto foi destacado na revista chinesa <i>New Graphic Design</i>, 
@@ -31,4 +31,3 @@
 	<p>
 	Seja bem vindo.
 	</p>
-
