@@ -1,4 +1,4 @@
-	prêmiações:
+	premiações:
 	<br>
 	<p>
 	– Prêmio Aloíso Magalhães / Fundação Biblioteca Nacional – 2o lugar, categoria projeto gráfico – 2010.<br>

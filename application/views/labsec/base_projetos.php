@@ -13,7 +13,7 @@
 		
 		<div class="canvas-principal">
 		
-			<div class="menu-top">
+			<div class="menu-top <?=isset($floating_menu) ? "floating-menu" : ""?>">
 				<div class="menu-top-content">
 					<?
 					/*
@@ -21,20 +21,28 @@
 						<span>+5521 2539 3146</span>
 						<span><a href="mailto:contato@laboratorioscreto.com">contato@laboratorioscreto.com</a></span>
 						<span>Rio de Janeiro Brasil</span>
+						
+						<div style="text-align:center; width:939px; margin-left:auto; margin-right:auto;">
+							<img id="Image-Maps_7201201261832496" src="/estaticos/img/header.jpg" usemap="#Image-Maps_7201201261832496" border="0" width="939" height="9" alt="" />
+							<map id="_Image-Maps_7201201261832496" name="Image-Maps_7201201261832496">
+							<area shape="rect" coords="0,0,379,8" href="/sobre" alt="" title=""    />
+							<area shape="rect" coords="530,0,766,8" href="mailto:contato@laboratorioscreto.com" alt="" title=""    />
+							</map>
+						</div>
 					*/
 					?>
-					<div style="text-align:center; width:939px; margin-left:auto; margin-right:auto;">
-						<img id="Image-Maps_7201201261832496" src="/estaticos/img/header.jpg" usemap="#Image-Maps_7201201261832496" border="0" width="939" height="9" alt="" />
-						<map id="_Image-Maps_7201201261832496" name="Image-Maps_7201201261832496">
-						<area shape="rect" coords="0,0,379,8" href="/sobre" alt="" title=""    />
-						<area shape="rect" coords="530,0,766,8" href="mailto:contato@laboratorioscreto.com" alt="" title=""    />
+					<div style="text-align:center; width:945px; margin-left:auto; margin-right:auto;">
+						<img id="Image-Maps_5201202022052323" src="/estaticos/img/header.png" usemap="#Image-Maps_5201202022052323" border="0" width="945" height="15" alt="" />
+						<map id="_Image-Maps_5201202022052323" name="Image-Maps_5201202022052323">
+						<area shape="rect" coords="0,0,394,15" href="/sobre" alt="" title=""    />
+						<area shape="rect" coords="529,0,772,15" href="mailto:contato@laboratorioscreto.com" alt="" title=""    />
 						</map>
 					</div>
-				
 				</div>
 			</div>
 			
-			<div class="content">
+
+			<div class="content" style='<?=isset($floating_menu) ? "padding-top:85px;" : "padding-top:25px;"?>'>
 				<?=$inner_view?>
 			</div>
 			

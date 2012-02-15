@@ -11,7 +11,7 @@
 			$cntt = Cache::instance('file')->set('cached_imagem_'.$projeto['id'], '/labsec/projetothumb/'.$projeto['id']);
 		}
 		
-		echo "<span><a href='/trabalho/{$projeto['id']}$url_categoria'><img src='$cntt' border='0'></a></span> \n";
+		echo "<span><a href='/projeto/".($projeto['slug']?$projeto['slug']:$projeto['id'])."$url_categoria'><img src='$cntt' border='0'></a></span> \n";
 
 	}
 	?>

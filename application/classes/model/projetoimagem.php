@@ -4,6 +4,13 @@
 	{
 		protected $_table_name = 'projetos_imagens';
 		protected $_primary_key = 'id';
+		
+		protected $_belongs_to = array(
+		    'projeto' => array(
+		        'model'       => 'projeto',
+		        'foreign_key' => 'proneto_id',
+		    ),
+		);
 
 	    public function rules()
 	    {

@@ -1,8 +1,12 @@
 <script type="text/javascript" src="/estaticos/js/jquery-ui-personalized-1.6rc4.min.js"></script>
 <script type="text/javascript" src="/estaticos/js/jquery.filestyle.mini.js"></script>
+<script type="text/javascript" src="/estaticos/js/jquery.slugit.js"></script>
 
 <script type="text/javascript">
   $(document).ready(function() {
+
+    $('#nome').slugIt( { output: '#slug' } );
+
   	$("#salvar_album").bind('click',function(){
   		$("#frmproj").submit();
   	});
@@ -19,7 +23,7 @@
     
 	$("input[type=file]").filestyle({ 
 	     image: "/estaticos/img/input_file.png",
-	     imageheight : 45,
+	     imageheight : 40,
 	     imagewidth : 165,
 	     width : 205
 	});
@@ -52,6 +56,9 @@
 	<div class="text_fields">
 		<label for="nome_do_projeto">nome do projeto</label>
 		<input type="text" name="nome" id="nome" value="<?=$projeto->nome?>">
+		
+		<label for="nome_do_projeto">slug (url)</label>
+		<input type="text" name="slug" id="slug" value="<?=$projeto->slug?>">
 		
 		<label>cliente/ano</label>
 		<input type="text" name="cliente_ano" id="cliente_ano" value="<?=$projeto->cliente_ano?>">
@@ -90,7 +97,7 @@
 				</th>
 			</tr>
 			<tr>
-				<td valign='middle' style="display:inline;padding:10px 0px;">
+				<td valign='top' style="padding-top:20px;">
 					<input type='file' name='thumb' id='thumb'>
 					<?
 					/*
@@ -131,7 +138,7 @@
 				<th >&nbsp;</th>
 			</tr>
 			<tr>
-				<td valign='middle' style="display:inline;padding:10px 0px;">
+				<td valign='middle'>
 					<input type='file' name='image_stored[-1]' id='stored_image'>
 					<?
 					/*
@@ -147,8 +154,16 @@
 	
 	<br><br>	
 	<div class="submit_fields">
-		<? /* 		<input type="image" src='/estaticos/img/input_salvar.png' style="width:167px;height:44px;background-color:#666;color:#ddd;"> */ ?>
+		<table width="100%">
+		<tr valign="top">
+		<td align="left">
+		<input type="button" id="excluir_projeto" style="background: url('/estaticos/img/excluir_projeto.png') no-repeat scroll 0 0 transparent;border: medium none;cursor: pointer;height: 45px;width: 85px;">
+		</td>
+		<td align="right">
 		<input type="image" src='/estaticos/img/salvar_projeto.png' style="width:124px;height:44px;border:none;">
+		</td>
+		</tr>
+		</table>
 	</div>
 	
 	
@@ -188,7 +203,13 @@
 			}
 			return false;
 		});
-			
+		
+		$("#excluir_projeto").bind("click",function(){
+			if(confirm("Esta operação não poderá ser desfeita.\n Tem certeza que deseja excluir este projeto?")){
+				$("form#frmproj").append("<input type='hidden' value='1' name='excluir_projeto'>");
+				$("form#frmproj").submit();
+			}
+		});
 		
 	});
 	</script>

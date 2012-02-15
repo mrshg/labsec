@@ -8,7 +8,7 @@ class Controller_Base extends Controller {
 		$base_params = array('inner_view' => "<div class='texto'>$view_out</div><div class='menu'>$menu_out</div>");
     	return View::factory('labsec/base_projetos', $base_params)->render();
     }
-
+    
     public function get_grid_3($param=array()) {	
 		$view_out = $param['inner_view']->render();
 		$menu_out = View::factory('labsec/painel_menu', array('user'=>isset($param['user'])?$param['user']:null));

@@ -12,42 +12,9 @@ class Controller_Painel extends Controller_Base {
 			}
 
 	}
-	
-    public function action_testes() {
-
-		$model = ORM::factory('user');
-		
-		try{
-			$model->create_user(array(
-			    'username' => 'laboratoriosecreto',
-			    'password' => 'mmartinez123',
-		    	'password_confirm' => 'mmartinez123',
-		        'email' => 'mm@laboratoriosecreto.com',
-			),array(
-			    'username',
-			    'password',
-		        'email',
-			));
-			
-			$model->save();
-
-			$model->add('roles', ORM::factory('role')->where('name', '=', 'login')->find());
-			$model->add('roles', ORM::factory('role')->where('name', '=', 'admin')->find());
-
-			print_r('Sucesso!');
-		}
-		catch (ORM_Validation_Exception $e)
-		{
-		    $errors = $e->errors('models');
-		    print_r($errors);
-		}				
-    	
-		$this->response->body("Feito");
-    }
-            
 
     public function action_projetos() {	
-    	$projetos = ORM::factory('projeto')->find_all();
+    	$projetos = ORM::factory('projeto')->order_by('id','desc')->find_all();
     	
 		$base_params = array(
 			'page' => 'listagem',
@@ -72,7 +39,18 @@ class Controller_Painel extends Controller_Base {
 	    	
 	    	if(isset($_POST) && !empty($_POST)){
 	    		
+	    		if(isset($_POST['excluir_projeto']) && $_POST['excluir_projeto']==1){
+		    		if($projeto->loaded()){
+
+		    			$projeto->remove('imagens');
+		    			$projeto->delete();
+		    			
+	    				Request::current()->redirect( "/painel" );
+		    		}
+	    		}
+	    		
 	    		$projeto->nome = $_POST['nome'];
+	    		$projeto->slug = $_POST['slug'];
 	    		$projeto->cliente_ano = $_POST['cliente_ano'];
 	    		$projeto->creditos = $_POST['creditos'];
 	    		$projeto->categorias = $_POST['categorias'];

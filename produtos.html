@@ -1,0 +1,291 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+
+        <title>Lourdes Festas - Buffet de Salgadinhos</title>
+        <meta name="Keywords" content="bolos, doces, salgados, salgadinhos, festas, 15 anos, casamentos,aniversários" />
+        <meta name="Description" content="Buffet Lourdes, localizado no Rio de Janeiro, fornece festas privadas e corporativas para a área do Rio e Grande Rio." />
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+        <link href="lubuffet.css" rel="stylesheet" type="text/css" />
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-10323590-1");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+
+    </head>
+
+    
+    <body>
+
+        <!-- Begin Container DIV -->
+        <div id="container">
+            <address>
+                Atendemos todo Rio e<br />Região Metropolitana<br />Tel: (21) 3375-8354<br />
+            </address>
+
+            <!-- Begin Header DIV -->
+            <div id="header">
+                <!-- Begin Horz Nav DIV -->
+                <div id="nav">
+                    <ul>
+                        <li><a href="index.html">Bem Vindo!</a></li>   
+                        <li><a href="produtos.html" id="current">Produtos</a></li>
+                        <li><a href="pacotes.html">Pacotes <br>especiais</a></li>
+
+                        <li><a href="contato.html">Contato</a></li>
+                    </ul>
+                <!-- End Horz Nav DIV -->
+                </div>
+            <!-- End Header DIV -->
+            </div>
+                    
+            <!-- Begin border DIV -->
+            <div id="border">
+
+
+<style>
+span {display:block;}
+.descsalg {display:none;color:#24A1B3;font-weight:normal;}
+.cart {height:12px;border:0px;cursor:hand;}
+.tblista {width:455px;margin-left:24px;font-size: 11px;}
+.tblista th {text-align:left;margin-top: 0px;margin-bottom: 5px;font-size: 12px;font-weight: bold;color: #128B9D;background-color: #FFEDC4;text-indent: 4pt;padding: 2px;font-family: Arial, Helvetica, sans-serif;border: 1px dashed #FDDB8B;margin-right: 43px;margin-left: 25px;}
+.tblista td { vertical-align:top;font-weight: bold;text-align: left;padding-left:5px;border-top: 1px dashed #F6CB57;padding-bottom:10px;}
+.tblista .tip { font-style:italic;padding-left:5px;font-weight:normal; border-top: 0px;}
+
+.simula {width:100%;border:1px solid #FDDB8B;}
+.simula th {background-color:#F4EDC3;text-align:center;}
+.simula td {border:1px solid #FDDB8B;text-align:center;}
+._subt { width:50px;} 
+._qtd { width:50px;} 
+</style>
+
+<script type="text/javascript" src="scripts/jquery-1.3.2.min.js"></script>
+<script type="text/javascript" src="scripts/thickbox-compressed.js"></script>
+<script type="text/javascript" src="scripts/json2.js"></script>
+
+<link rel="stylesheet" href="thickbox.css" type="text/css" media="screen" />
+
+<script>
+ valores = {"simulacao": []};
+
+ function drawTable(valClicado){
+   valores.simulacao[valores.simulacao.length] = valClicado;
+   html="<table class=simula cellpadding=0 cellspacing=0 border=0>";
+   html+="<tr><th>Item</th><th>Valor</th><th>Qunt.</th><th>Sub.</th><th>...</th></tr>";
+   totalQtd = 0;
+   totalVal = 0;
+   for(i=0; i<valores.simulacao.length; i++){
+      idLine = "idLii"+i;
+      subt = parseFloat(valores.simulacao[i].valor.substr(3)) * (parseInt(valores.simulacao[i].quantidade)/100);
+      html+="<tr id='"+idLine+"'><td id='"+idLine+"_nome' class='_nome'>"+valores.simulacao[i].nome+"</td><td id='"+idLine+"_val' class='_val'>"+valores.simulacao[i].valor+"</td><td id='"+idLine+"_qtd' class='_qtd'>"+valores.simulacao[i].quantidade+"</td><td id='"+idLine+"_subt'class='_subt'>"+subt+"</td><td> <a href=\"javascript:btnCtrl('"+idLine+"',1);\"><img src='images/arrow1_n.gif' id='bsim1' border='0'></a> <a href=\"javascript:btnCtrl('"+idLine+"',2);\"><img src='images/arrow1_s.gif' id='bsim2' border='0'></a> <a href=\"javascript:btnCtrl('"+idLine+"',3);\"><img src='images/close.gif' id='bsim3' border='0'></a> </td></tr>";
+  	  totalQtd += parseInt(valores.simulacao[i].quantidade);
+		  totalVal += subt;
+   }
+   html+="<tr><td colspan=2 align=left>Total</td><th id='totalQtd'>"+totalQtd+"</th><th id='totalVal'>R$ "+totalVal+"</th><td>...</td></tr>";
+   html+="</table>";
+   return html;
+ }
+
+ function permanecerSimulacao(){
+    var novoValores = {"simulacao": []};
+    var $tds = $(".simula").find("tr");
+    
+    $tds.each(function (i) {
+      if(this.id){
+        nObj = {"nome":$("#"+this.id).find("._nome").text(),"valor":$("#"+this.id).find("._val").text(),"quantidade":$("#"+this.id).find("._qtd").text()}
+        novoValores.simulacao[novoValores.simulacao.length] = nObj;
+      }
+    });
+    valores = novoValores;
+    $("#lista").val(JSON.stringify(valores));
+ }
+ function somaSubT(){
+   total = 0;
+    $("._subt").each(function (i) {
+      total += parseFloat(this.innerHTML)
+    });
+   return total;
+ }
+ function somaT(){
+   total = 0;
+    $("._qtd").each(function (i) {
+      total += parseInt(this.innerHTML)
+    });
+   return total;
+ }
+ 
+ function btnCtrl(objAnchor, ctrlId){
+     step = 50;
+     qtd = parseInt( $("#"+objAnchor+"_qtd").text() );
+     
+     if(ctrlId==1){
+     		qtd = qtd + step;
+     		subtOriginal = parseFloat($("#"+objAnchor+"_val").text().substr(3))
+     		subt = parseFloat($("#"+objAnchor+"_val").text().substr(3)) * (qtd/100);
+     		$("#"+objAnchor+"_qtd").text(qtd);
+     		$("#"+objAnchor+"_subt").text(subt);
+     		
+     		$("#totalQtd").text( somaT() );
+     		$("#totalVal").text( "R$ " + somaSubT() );
+     		permanecerSimulacao();
+     }
+     if(ctrlId==2){
+     		qtd = qtd - step;
+     		if(qtd > 0){
+	     		subtOriginal = parseFloat($("#"+objAnchor+"_val").text().substr(3))
+	     		subt = parseFloat($("#"+objAnchor+"_val").text().substr(3)) * (qtd/100);
+	     		$("#"+objAnchor+"_qtd").text(qtd);
+	     		$("#"+objAnchor+"_subt").text(subt);
+	     		
+	     		$("#totalQtd").text( somaT() );
+	     		$("#totalVal").text( "R$ " + somaSubT() );
+	     		permanecerSimulacao();
+     		}
+     }
+     if(ctrlId==3){
+     		$("#"+objAnchor).remove();
+     		$("#totalQtd").text( somaT() );
+     		$("#totalVal").text( somaSubT() );
+     		permanecerSimulacao();
+     }
+ }
+
+ $(document).ready(function() {
+    $(".cart").click(function () {
+      jsonClick = {"nome": $(this).parent().parent().find(".salg").html(), "valor":$(this).parent().parent().find(".valor").html(), "quantidade":"100"};
+      $("#myOnPageContentText").html(drawTable(jsonClick));
+      $("#clkshow").click()
+    });
+    $(".salg").click(function () {
+      if ($(".descsalg").is(":hidden")) {
+        $(".descsalg").slideDown("slow");
+      } else {
+        $(".descsalg").slideUp("slow");
+      }
+    });
+ });
+
+</script>
+
+ 
+                <!-- Begin Content DIV -->
+                <div id="content">
+                    <h1>Produtos oferecidos</h1>
+                    <p><img src="images/fruittray.jpg" alt="boxed lunches, catering, vegetable trays, fruit trays" /></p>
+                    
+                    <form method="post" action="contato.php">
+				<div id="myOnPageContent" style="display:none;">
+					<p id="myOnPageContentTip"><br>Você está simulando um pedido!<br>Cada vez que você clica no ícone <img src="images/cart3.gif"> o item clicado é adicionado a sua lista de simulação que você pode controlar como quiser.<bR>Ao final de sua simulação, você pode clicar no botão "Pronto!" e enviá-la a nós. <span style="color:red">Atenção: se você recarregar esta página ou sair dela, sua simulação será perdida e você terá de reiniciá-la.</span></p>
+					<p id="myOnPageContentText"></p><p><center><input style="margin-left:0px;border:2px solid #FCC135;background-color:#FDDB8B;color:#128B9D;font-weight:bold;" type=submit value="Pronto! Enviar mensagem!" onClick="permanecerSimulacao();document.forms[0].submit();"></center></p><br>
+				</div>
+				<input id="clkshow" alt="#TB_inline?height=350&amp;width=500&amp;inlineId=myOnPageContent" class="thickbox" type="hidden" title="Simulação"/>
+				<input type="hidden" name="lista" id="lista">
+				<input type="hidden" name="teste" value='testando'>
+		      </form>
+
+										<table class="tblista">
+										    <tr><th colspan="3">Salgadinhos fritos simples</th></tr>
+										    <tr><td class="tip">(valores referentes a 100 unidades)</td></tr>
+										    <tr><td width="360"><span class="salg">Azeitona recheada (carne)</span><span class="descsalg">(aguarde, descrição em breve.)</span>      </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Azeitona recheada (catupiri)</span><span class="descsalg">(aguarde, descrição em breve.)</span>   </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Bolinha de catupiri</span><span class="descsalg">(aguarde, descrição em breve.)</span>            </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Bolinha de queijo</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 35,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Coxinha</span><span class="descsalg">(aguarde, descrição em breve.)</span>                        </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Coxinha com catupiri</span><span class="descsalg">(aguarde, descrição em breve.)</span>           </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Croquete de carne</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Croquete de frango</span><span class="descsalg">(aguarde, descrição em breve.)</span>             </td><td class="valor">R$ 40,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Croquete de milho</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Croquete de milho com catupiri</span><span class="descsalg">(aguarde, descrição em breve.)</span> </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Enroladinho queijo com presunto</span><span class="descsalg">(aguarde, descrição em breve.)</span></td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Kibe</span><span class="descsalg">(aguarde, descrição em breve.)</span>                           </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Kibe com catupiri</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 40,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Ovo de codorna empanado</span><span class="descsalg">(aguarde, descrição em breve.)</span>        </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Ovo de codorna ao molho</span><span class="descsalg">(aguarde, descrição em breve.)</span>        </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Risole de camarão</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Risole de camarão com catupiri</span><span class="descsalg">(aguarde, descrição em breve.)</span> </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Risole de carne</span><span class="descsalg">(aguarde, descrição em breve.)</span>                </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Risole de frango</span><span class="descsalg">(aguarde, descrição em breve.)</span>               </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Risole de queijo com presunto</span><span class="descsalg">(aguarde, descrição em breve.)</span>  </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Risole de palmito</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Salsicha empanada</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										</table>
+										
+										<table class="tblista">
+										    <tr><th colspan="3">Salgadinhos fritos especiais</th></tr>
+										    <tr><td class="tip">(valores referentes a 100 unidades)</td></tr>
+										    <tr><td width="360"><span class="salg">Bolinho de bacalhau</span><span class="descsalg">(aguarde, descrição em breve.)</span>            </td><td class="valor">R$ 40,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">camarão empanado</span><span class="descsalg">(aguarde, descrição em breve.)</span>               </td><td class="valor">R$ 50,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">camarão (em coxinha)</span><span class="descsalg">(aguarde, descrição em breve.)</span>           </td><td class="valor">R$ 50,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Churrasquinho de carne</span><span class="descsalg">(aguarde, descrição em breve.)</span>         </td><td class="valor">R$ 45,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Churrasquinho de frango</span><span class="descsalg">(aguarde, descrição em breve.)</span>        </td><td class="valor">R$ 45,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Churrasquinho de peixe</span><span class="descsalg">(aguarde, descrição em breve.)</span>         </td><td class="valor">R$ 45,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Batata frita</span><span class="descsalg">(aguarde, descrição em breve.)</span>                   </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Maçã com canela</strong</span><span class="descsalg">(aguarde, descrição em breve.)</span>        </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										</table>
+										
+										<table class="tblista">
+										    <tr><th colspan="3">Salgadinhos assados</th></tr>
+										    <tr><td class="tip">(valores referentes a 100 unidades)</td></tr>
+										    <tr><td width="360"><span class="salg">Ameixas com bacon</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Ameixas com fios de ovos</span><span class="descsalg">(aguarde, descrição em breve.)</span>       </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Banana com canela</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Barquete de bacalhau</span><span class="descsalg">(aguarde, descrição em breve.)</span>           </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Barquete de legumes</span><span class="descsalg">(aguarde, descrição em breve.)</span>            </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Cachorrinho quente</span><span class="descsalg">(aguarde, descrição em breve.)</span>             </td><td class="valor">R$ 50,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada de camarão</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada de chocolate</span><span class="descsalg">(aguarde, descrição em breve.)</span>            </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada de palmito</span><span class="descsalg">(aguarde, descrição em breve.)</span>              </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada de frango</span><span class="descsalg">(aguarde, descrição em breve.)</span>               </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada de queijo</span><span class="descsalg">(aguarde, descrição em breve.)</span>               </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada Romeu e Julieta</span><span class="descsalg">(aguarde, descrição em breve.)</span>         </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Empada de banana</span><span class="descsalg">(aguarde, descrição em breve.)</span>               </td><td class="valor">R$ 35,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Esfiha de Carne/Queijo/Frango</span><span class="descsalg">(aguarde, descrição em breve.)</span>  </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Fios de ovos com cereja</span><span class="descsalg">(aguarde, descrição em breve.)</span>        </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Fios de ovos com peito de peru</span><span class="descsalg">(aguarde, descrição em breve.)</span> </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Goiaba com catupiri</span><span class="descsalg">(aguarde, descrição em breve.)</span>            </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Joelhinhos (queijo e preseunto)</span><span class="descsalg">(aguarde, descrição em breve.)</span></td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Mini pizzas tradicionais</span><span class="descsalg">(aguarde, descrição em breve.)</span>       </td><td class="valor">R$ 40,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Pãozinho de azeitona</span><span class="descsalg">(aguarde, descrição em breve.)</span>           </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Pastel de queijo com prsnto</span><span class="descsalg">(aguarde, descrição em breve.)</span>    </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Pastel foliado de bacalhau</span><span class="descsalg">(aguarde, descrição em breve.)</span>     </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Pastel foliado de camarão</span><span class="descsalg">(aguarde, descrição em breve.)</span>      </td><td class="valor">R$ 30,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Pastel foliado de carne</span><span class="descsalg">(aguarde, descrição em breve.)</span>        </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										    <tr><td width="360"><span class="salg">Pastel foliado de frango</span><span class="descsalg">(aguarde, descrição em breve.)</span>       </td><td class="valor">R$ 25,00</td><td><img class="cart" src="images/cart3.gif"></td></tr>
+										</table>                                       
+										                                               
+
+
+                    
+                <!-- End Content DIV -->
+                </div>
+                
+                <!-- Begin left DIV -->
+                <div id="left">
+                    <img src="images/logo.gif" alt="" />
+                <!-- End left DIV -->
+                </div>
+                
+            <!-- End border DIV -->
+            </div>
+
+                
+            <!-- Begin Footer DIV -->
+            <div id="footer">
+            <!-- End Footer DIV -->
+            </div>
+            
+        <!-- End Container DIV -->
+        </div>
+            
+        <div id="copyright"><imv_copyright>Copyright&nbsp;&copy;&nbsp;<imv_year>2006</imv_year> <a href="http://www.lourdesfestas.com/">Lourdes Festas</a> All Rights Reserved.</imv_copyright></div>
+
+            
+    </body>
+    
+</html>

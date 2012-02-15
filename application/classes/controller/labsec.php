@@ -37,18 +37,18 @@ class Controller_Labsec extends Controller_Base {
 		$categoria = trim($this->request->param('categoria')); //TODO: mysql_real_escape_string
 		
 		if(!empty($categoria)){
-			return DB::query(Database::SELECT,"select id,nome from projetos where categorias like '%$categoria%'")->cached('cached_thumb',84600)->execute()->as_array();
+			return DB::query(Database::SELECT,"select id,slug,nome from projetos where categorias like '%$categoria%'")->cached('cached_thumb',84600)->execute()->as_array();
 		}else{
-			return DB::query(Database::SELECT,"select id,nome from projetos")->cached('cached_thumb',84600)->execute()->as_array();
+			return DB::query(Database::SELECT,"select id,slug,nome from projetos")->cached('cached_thumb',84600)->execute()->as_array();
 		}
 	}
-
+	
 	public function action_home()
 	{
 		$kAt = trim($this->request->param('categoria'));
 		$Res = $this->__obter_lista_projetos($kAt);
 		
-		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => $Res, 'categoria'=>$kAt)));
+		$base_params = array('inner_view' => View::factory('labsec/home', array('projetos' => $Res, 'categoria'=>$kAt)), 'floating_menu'=>true);
 		$this->response->body(View::factory('labsec/base_projetos', $base_params)->render());
 	}
 
@@ -102,23 +102,31 @@ class Controller_Labsec extends Controller_Base {
 		$this->response->body($this->get_grid_2($base_params));
 	}
 
-	public function action_trabalho()
+	public function action_projeto()
 	{
-		
-			if(is_numeric($this->request->param('id'))){ 
-				
+		$loaded = false;
+	
+		if($this->request->param('id')){
+	    	
+	    	$projeto = ORM::factory('projeto')->where('slug', '=', $this->request->param('id'))->cached(60*60)->find();
+			if(!$projeto->loaded()){
+		    	$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->cached(60*60)->find();
+			}
+			
+			if($projeto->loaded()){
+
 				$kAt = trim($this->request->param('categoria'));
 				$Res = $this->__obter_lista_projetos($kAt);
 				$nav = array('anterior'=>null, 'proximo'=>null, 'ant_nome'=>null, 'pro_nome'=>null);
 				$cpt = array('twitter'=>null, 'facebook'=>null);
 				for($i=0; $i<count($Res); $i++){
-					if($Res[$i]['id'] == $this->request->param('id')){
+					if($Res[$i]['id'] == $projeto->id){
 
-						$cpt['twitter'] = "http://twitter.com/?status=".urlencode('Enquanto isso, no #LaboratórioSecreto:')." http://laboratoriosecreto.com/trabalho/{$Res[$i]['id']}"; 
-						$cpt['facebook'] = "http://www.facebook.com/share.php?t=".urlencode('Enquanto isso, no #LaboratórioSecreto...')."&u=http://laboratoriosecreto.com/trabalho/{$Res[$i]['id']}";
+						$cpt['twitter'] = "http://twitter.com/?status=".urlencode('Enquanto isso, no #laboratoriosecreto:')." http://laboratoriosecreto.com/projeto/{$Res[$i]['id']}"; 
+						$cpt['facebook'] = "http://www.facebook.com/share.php?t=".urlencode('Enquanto isso, no #laboratoriosecreto...')."&u=http://laboratoriosecreto.com/projeto/{$Res[$i]['id']}";
 						
-						$nav['anterior'] = '/trabalho/'. (($i==0) ? $Res[count($Res)-1]['id'] : $Res[$i-1]['id']); 
-						$nav['proximo'] = '/trabalho/'. (($i==count($Res)-1) ? $Res[0]['id'] : $Res[$i+1]['id']); 
+						$nav['anterior'] = '/projeto/'. (($i==0) ? $Res[count($Res)-1]['slug'] : $Res[$i-1]['slug']); 
+						$nav['proximo'] = '/projeto/'. (($i==count($Res)-1) ? $Res[0]['slug'] : $Res[$i+1]['slug']); 
 						$nav['ant_nome'] = (($i==0) ? $Res[count($Res)-1]['nome'] : $Res[$i-1]['nome']); 
 						$nav['pro_nome'] = (($i==count($Res)-1) ? $Res[0]['nome'] : $Res[$i+1]['nome']); 
 						if($kAt){
@@ -127,9 +135,7 @@ class Controller_Labsec extends Controller_Base {
 						}
 					}
 				}
-				
 		    	
-		    	$projeto = ORM::factory('projeto')->where('id', '=', $this->request->param('id'))->find();
 	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode("<br>&#9733; ",$projeto->mencoes) : null;
 	    		
 	    		if($projeto->categorias){
@@ -156,11 +162,15 @@ class Controller_Labsec extends Controller_Base {
 		
 				$this->response->body($this->get_grid_2($base_params));
 				
-	    	}else{
-				Request::current()->redirect( Kohana::$base_url );
-	    	}
-	    	
-
+				$loaded = true;
+			} 
+			
+    	}
+    	
+    	if(!$loaded){
+			Request::current()->redirect( Kohana::$base_url );
+    	}
+			
 	}
 
     public function action_projetothumb($param=array()) {
