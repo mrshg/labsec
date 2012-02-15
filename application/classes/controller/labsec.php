@@ -37,9 +37,9 @@ class Controller_Labsec extends Controller_Base {
 		$categoria = trim($this->request->param('categoria')); //TODO: mysql_real_escape_string
 		
 		if(!empty($categoria)){
-			return DB::query(Database::SELECT,"select id,slug,nome from projetos where categorias like '%$categoria%'")->cached('cached_thumb',84600)->execute()->as_array();
+			return DB::query(Database::SELECT,"select id,slug,nome from projetos where categorias like '%$categoria%' order by id desc")->cached('cached_thumb',84600)->execute()->as_array();
 		}else{
-			return DB::query(Database::SELECT,"select id,slug,nome from projetos")->cached('cached_thumb',84600)->execute()->as_array();
+			return DB::query(Database::SELECT,"select id,slug,nome from projetos order by id desc")->cached('cached_thumb',84600)->execute()->as_array();
 		}
 	}
 	
@@ -136,7 +136,7 @@ class Controller_Labsec extends Controller_Base {
 					}
 				}
 		    	
-	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode("<br>&#9733; ",$projeto->mencoes) : null;
+	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode(";<br>&#9733; ",$projeto->mencoes).";" : null;
 	    		
 	    		if($projeto->categorias){
 	    			$cats_procs = array();

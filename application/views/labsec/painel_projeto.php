@@ -2,8 +2,21 @@
 <script type="text/javascript" src="/estaticos/js/jquery.filestyle.mini.js"></script>
 <script type="text/javascript" src="/estaticos/js/jquery.slugit.js"></script>
 
+<script type="text/javascript" src="/estaticos/js/jquery.autocomplete-min.js"></script>
+<link type="text/css" href="/estaticos/js/jquery.autocomplete-min.css" rel="stylesheet" />
+
 <script type="text/javascript">
   $(document).ready(function() {
+  	
+	jQuery(function(){
+	  options = { serviceUrl:'/painel/autocomplete' };
+	  a = $('#categorias').autocomplete({ 
+		    serviceUrl:'/painel/autocomplete',
+		    delimiter: /(,|;)\s*/, // regex or character,
+		    left:'480.5px'
+	  });
+	});
+  	
 
     $('#nome').slugIt( { output: '#slug' } );
 

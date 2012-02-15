@@ -161,5 +161,28 @@ class Controller_Painel extends Controller_Base {
 		exit();
     }
 
+    public function action_autocomplete($param=array()) {
+    	if(isset($_GET['query'])){
+    		$its = array();
+    		$qry = $_GET['query'];
+    		$Res = DB::query(Database::SELECT,"select distinct categorias from projetos where categorias like '%{$qry}%'")->execute()->as_array();
+    		foreach($Res as $res){
+	    		foreach(explode(',',$res['categorias']) as $wrd){
+    				$val = "'".trim($wrd)."'";
+	    			if(is_numeric(stripos($wrd,$_GET['query'])) && !in_array($val, $its)){
+	    				array_push($its,$val);
+	    			}
+	    		}
+    		}
+			echo "{ query:'$qry',suggestions:[".implode(',',$its)."],data:[".implode(',',$its)."] }";
+    	}else{
+	    	echo "{}";
+    	}
+	
+		exit();
+    }
+    
+    
+
 
 }
