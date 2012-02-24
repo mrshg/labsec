@@ -121,9 +121,13 @@ class Controller_Labsec extends Controller_Base {
 				$cpt = array('twitter'=>null, 'facebook'=>null);
 				for($i=0; $i<count($Res); $i++){
 					if($Res[$i]['id'] == $projeto->id){
+						
+						$thisuri = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
 
-						$cpt['twitter'] = "http://twitter.com/?status=".urlencode('Enquanto isso, no #laboratoriosecreto:')." http://laboratoriosecreto.com/projeto/{$Res[$i]['id']}"; 
-						$cpt['facebook'] = "http://www.facebook.com/share.php?t=".urlencode('Enquanto isso, no #laboratoriosecreto...')."&u=http://laboratoriosecreto.com/projeto/{$Res[$i]['id']}";
+//						$cpt['twitter'] = "http://twitter.com/?status=".urlencode('Enquanto isso, no #laboratoriosecreto:')." http://laboratoriosecreto.com/projeto/{$Res[$i]['id']}"; 
+//						$cpt['facebook'] = "http://www.facebook.com/share.php?t=".urlencode('Enquanto isso, no #laboratoriosecreto...')."&u=http://laboratoriosecreto.com/projeto/{$Res[$i]['id']}";
+						$cpt['twitter'] = "http://twitter.com/?status=".urlencode('Enquanto isso, no #laboratoriosecreto:')." $thisuri"; 
+						$cpt['facebook'] = "http://www.facebook.com/share.php?t=".urlencode('Enquanto isso, no #laboratoriosecreto...')."&u=$thisuri";
 						
 						$nav['anterior'] = '/projeto/'. (($i==0) ? $Res[count($Res)-1]['slug'] : $Res[$i-1]['slug']); 
 						$nav['proximo'] = '/projeto/'. (($i==count($Res)-1) ? $Res[0]['slug'] : $Res[$i+1]['slug']); 
@@ -136,7 +140,7 @@ class Controller_Labsec extends Controller_Base {
 					}
 				}
 		    	
-	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode(";<br>&#9733; ",$projeto->mencoes).";" : null;
+	    		$projeto->mencoes = ($projeto->mencoes) ? "&#9733; ".implode("<br>&#9733; ",$projeto->mencoes)."" : null;
 	    		
 	    		if($projeto->categorias){
 	    			$cats_procs = array();

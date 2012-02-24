@@ -13,8 +13,8 @@ class Controller_Base extends Controller {
 		$view_out = $param['inner_view']->render();
 		$menu_out = View::factory('labsec/painel_menu', array('user'=>isset($param['user'])?$param['user']:null));
 		if(isset($param['page']) && $param['page']=='formulario'){
-			$htAct = "<strong><a href='#' id='salvar_album' style='font-size:18px;text-decoration:none;'>salvar álbum</a></strong>&nbsp;&nbsp;&nbsp;";
-			$htAct.= "<strong><a href='/painel/projetos' style='font-size:18px;text-decoration:none;color:#bbb;'>cancelar</a></strong>&nbsp;&nbsp;";
+			$htAct = "<strong><a href='#' id='salvar_album' style='font-size:18px;text-decoration:none;'>salvar projeto</a></strong>&nbsp;&nbsp;&nbsp;";
+			$htAct.= "<strong><a href='/painel/projetos' style='font-size:18px;text-decoration:none;color:#bbb;'>voltar</a></strong>&nbsp;&nbsp;";
 		}else{
 			$htAct = "<strong><a href='/painel/projeto/novo' style='font-size:18px;text-decoration:none;'>inserir novo álbum</a></strong>";
 		}
